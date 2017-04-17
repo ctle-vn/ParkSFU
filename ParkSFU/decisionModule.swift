@@ -2,10 +2,10 @@
 //  decisionModule.swift
 //  CMPT275
 //
-//  Created and written by Greyson Wang on 11/3/16.
+//  Created and written by Christopher Le and Greyson Wang on 11/3/16.
 //  Copyright © 2016 Christopher Le. All rights reserved.
 //  This file is the preliminary code for deciding whether the user has parked their car
-//  The top and bottom edge of a row of parking stalls is modelled using a linear relationship. 
+//  The top and bottom edge of a row of parking stalls is modelled using a linear relationship.
 //  If the user's x coordinate is within the row of parking stalls, we use the linear relationship to compute
 //  the y coordinate of the edge of the parking stall, and if the user's y coordinate is between those 2 values, the user is inside the parking stall.
 //  We define the vector parkingDirection as the direction that the user should be moving right before they are parking their car.
@@ -25,13 +25,13 @@ func userState(xCoord: Double, yCoord: Double ) -> String {
     var state = "driving"
     var userSpeed = 0
     var userDirection = (0, 0) //vector, direction user was moving before they parked
-    
+
     userSpeed = getUserSpeed()
-    
+
     if userInParkingLot() == true
     {
         userDirection = getUserDirection()
-        
+
             if userSpeed == 0
             {
                 if userInStall(xCoord, userYCoord: yCoord) == true && angle(userDirection) < 25
@@ -39,9 +39,9 @@ func userState(xCoord: Double, yCoord: Double ) -> String {
                     state = "parked"
                 }
             }
-        
+
     }
-    
+
     return state
 }
 
@@ -56,16 +56,16 @@ func userInStall(userXCoord: Double, userYCoord: Double) -> Bool {
     // calculate the 2 linear lines for the top and bottom edge of the row of parking stalls
     topSlope = (stallTopRight.1 - stallTopLeft.1)/(stallTopRight.0 - stallTopLeft.0)
     bottomSlope = (stallBottomRight.1 - stallBottomLeft.1)/(stallBottomRight.0 - stallBottomLeft.0)
-    
+
     if userXCoord > stallTopLeft.0 && userXCoord < stallTopRight.0 {
         stallTopEdge = stallTopLeft.1 + (topSlope * (userXCoord - stallTopLeft.0))
         stallBottomEdge = stallBottomLeft.1 + (bottomSlope * (userXCoord - stallBottomLeft.0))
-        
+
         if userYCoord < stallTopEdge && userYCoord > stallBottomEdge {
             userInStall = true
         }
     }
-    
+
     return userInStall
 }
 
@@ -73,12 +73,12 @@ func userInStall(userXCoord: Double, userYCoord: Double) -> Bool {
 // stab function, to be implemented later
 func angle(userDirection: (Int, Int)) -> Int {
     return 11
-    
+
 }
 
 // Returns direction that user was moving in before they parked
 func getUserDirection() -> (Int, Int) {
-    
+
     return (27, 27)
 }
 
@@ -89,6 +89,6 @@ func getUserSpeed() -> Int {
 
 // stub function
 func userInParkingLot() -> Bool {
-    
+
  return true
 }
